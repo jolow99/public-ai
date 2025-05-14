@@ -21,7 +21,12 @@ export default function DashboardNavbar() {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Link href="/" prefetch className="text-xl font-bold">
-            Logo
+            <div className="flex items-center">
+              <div className="bg-[#ef243d] text-white py-2 px-3 flex items-center">
+                <img src="/logo.png" alt="Public AI Network Logo" className="h-8 w-8 mr-2" />
+                <span className="ml-2 font-bold text-white">Public AI Network</span>
+              </div>
+            </div>
           </Link>
         </div>
         <div className="flex gap-4 items-center">

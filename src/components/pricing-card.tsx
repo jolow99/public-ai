@@ -60,8 +60,7 @@ export default function PricingCard({
 
   // Define features based on plan type
   const getFeaturesForPlan = (planName: string) => {
-    // if (planName.toLowerCase().includes("free"))
-    if (true) {
+    if (planName && planName.toLowerCase().includes("free")) {
       return [
         "Access to basic AI models",
         "Limited message history",
@@ -83,33 +82,47 @@ export default function PricingCard({
 
   return (
     <Card
-      className={`w-[350px] relative overflow-hidden ${item.popular ? "border-2 border-blue-500 shadow-xl scale-105" : "border border-gray-200"}`}
+      className={`w-[350px] relative overflow-hidden transition-transform duration-200 p-6
+        ${item.popular 
+          ? "border-2 border-[#ef243d] shadow-xl scale-105 !bg-white ring-2 ring-[#ef243d]/30 !text-gray-900" 
+          : "border border-gray-200 !bg-gray-50 !text-gray-700"}
+      `}
     >
       {item.popular && (
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#ef243d]/10 via-white to-purple-50 opacity-30 pointer-events-none" />
       )}
       <CardHeader className="relative">
         {item.popular && (
-          <div className="px-4 py-1.5 text-sm font-medium text-white bg-gradient-to-r from-brand-red to-brand-green rounded-full w-fit mb-4">
+          <div className="px-4 py-1.5 text-sm font-medium text-white bg-gradient-to-r from-[#ef243d] to-[#108171] rounded-full w-fit mb-4 shadow">
             Most Popular
           </div>
         )}
-        <CardTitle className="text-2xl font-bold tracking-tight text-gray-900">
+        <CardTitle className={`text-2xl font-bold tracking-tight ${item.popular ? "!text-[#ef243d]" : "!text-gray-900"}`}>
           {item.name}
         </CardTitle>
-        <CardDescription className="flex items-baseline gap-2 mt-2">
-          <span className="text-4xl font-bold text-gray-900">
+        <CardDescription className="flex items-baseline gap-2 mt-2 !text-gray-900">
+          <span className={`text-4xl font-bold ${item.popular ? "!text-[#ef243d]" : "!text-gray-900"}`}>
             ${item?.amount / 100}
           </span>
-          <span className="text-gray-600">/{item?.interval}</span>
+          <span className="!text-gray-600">/{item?.interval}</span>
         </CardDescription>
+        {!item.popular && (
+          <div className="mt-2 text-sm text-gray-600">
+            Rate limiting and slower speeds apply.
+          </div>
+        )}
+        {item.popular && (
+          <div className="mt-2 text-sm text-[#108171] font-semibold">
+            Less rate limiting and faster speeds.
+          </div>
+        )}
       </CardHeader>
-      <CardContent>
+      <CardContent className="!text-gray-900">
         <ul className="space-y-3 mt-4">
           {features.map((feature, index) => (
             <li key={index} className="flex items-start">
               <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-              <span className="text-gray-600">{feature}</span>
+              <span className="!text-gray-900">{feature}</span>
             </li>
           ))}
         </ul>
@@ -119,7 +132,7 @@ export default function PricingCard({
           onClick={async () => {
             await handleCheckout(item.id);
           }}
-          className={`w-full py-6 text-lg font-medium ${item.name?.toLowerCase().includes("free") ? "bg-[#108171] hover:bg-[#0a6a5c]" : ""}`}
+          className={`w-full py-6 text-lg font-medium ${item.popular ? "bg-[#ef243d] hover:bg-[#d41e35] text-white" : "bg-[#108171] hover:bg-[#0a6a5c] text-white"}`}
         >
           {!item.name || item.name.toLowerCase().includes("free")
             ? "Get Started"

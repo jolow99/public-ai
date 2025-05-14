@@ -198,7 +198,7 @@ export default async function Home() {
               features and models.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
             {/* Free tier card */}
             <PricingCard
               item={{

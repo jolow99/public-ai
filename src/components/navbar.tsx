@@ -17,8 +17,8 @@ export default async function Navbar() {
         <Link href="/" prefetch className="text-xl font-bold">
           <div className="flex items-center">
             <div className="bg-[#ef243d] text-white py-2 px-3 flex items-center">
-              <span className="text-2xl font-bold">≡</span>
-              <span className="ml-2 font-bold">Public AI Network</span>
+              <img src="/logo.png" alt="Public AI Network Logo" className="h-8 w-8 mr-2" />
+              <span className="ml-2 font-bold text-white">Public AI Network</span>
             </div>
           </div>
         </Link>
